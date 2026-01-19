@@ -7,6 +7,7 @@ import certifi
 
 from coros.region_config import REGIONCONFIG
 from coros.sts_config import STS_CONFIG
+from coros_db import CorosDB
 
 class CorosClient:
     
@@ -55,7 +56,17 @@ class CorosClient:
         self.teamapi = REGIONCONFIG[self.regionId]['teamapi']
 
     ## 上传运动
-    def uploadActivity(self, oss_object, md5, fileName, size):
+    def uploadActivity(self, oss_object, md5, fileName, size, fit_md5):
+        ## 建立DB链接
+        coros_db = CorosDB('coros.db')
+        from coros_sync_garmin import init
+        ## 初始化DB位置和下载文件位置
+        init(coros_db)
+        exist = coros_db.getByFitMd5(fit_md5)
+        if exist:
+            print(f"不再上传重复数据,文件名: {fileName}")
+            return True
+
         ## 判断Token 是否为空
         if self.accessToken == None:
             self.login()

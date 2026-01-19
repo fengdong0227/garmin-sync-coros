@@ -21,7 +21,15 @@ class CorosDB:
             query_size = len(exists_query_set)
             if query_size == 0:
               db.execute('insert into coros_activity (activity_id, sport_type) values (?,?)', (id,sport_type)) 
-    
+
+    def getByFitMd5(self, fit_md5):
+        select_un_upload_sql = 'SELECT fit_md5 FROM coros_activity WHERE fit_md5 = ?'
+        with SqliteDB(self._coros_db_name) as db:
+            result = db.execute(select_un_upload_sql, (fit_md5,)).fetchall()
+            query_size = len(result)
+            return query_size > 0
+
+
     def getUnSyncActivity(self):
         select_un_upload_sql = 'SELECT activity_id,sport_type FROM coros_activity WHERE is_sync_garmin = 0 limit 1000'
         with SqliteDB(self._coros_db_name) as db:
@@ -38,10 +46,10 @@ class CorosDB:
                     activity_list.append(activity)
                 return activity_list
             
-    def updateSyncStatus(self, activity_id:int):
-        update_sql = "update coros_activity set is_sync_garmin = 1 WHERE activity_id = ?"
+    def updateSyncStatus(self, activity_id:int, fit_md5:str):
+        update_sql = "update coros_activity set is_sync_garmin = 1, fit_md5 = ? WHERE activity_id = ?"
         with SqliteDB(self._coros_db_name) as db:
-          db.execute(update_sql, (activity_id,))
+          db.execute(update_sql, (fit_md5, activity_id,))
     
     def updateExceptionSyncStatus(self, activity_id:int):
         update_sql = "update coros_activity set is_sync_garmin = 2 WHERE activity_id = ?"
@@ -58,7 +66,8 @@ class CorosDB:
               sport_type INTEGER NOT NULL  , 
               is_sync_garmin INTEGER NOT NULL  DEFAULT 0,
               create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-              update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+              update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+              fit_md5 text,
           ) 
 
           '''

@@ -1,5 +1,5 @@
 import os
-import sys 
+import sys
 
 CURRENT_DIR = os.path.split(os.path.abspath(__file__))[0]  # 当前目录
 config_path = CURRENT_DIR.rsplit('/', 1)[0]  # 上三级目录
@@ -9,6 +9,7 @@ from coros_client import CorosClient
 from config  import DB_DIR, COROS_FIT_DIR
 from coros_db import CorosDB
 from garmin.garmin_client import GarminClient
+from utils.md5_utils import calculate_md5_file
 
 
 SYNC_CONFIG = {
@@ -65,7 +66,6 @@ if __name__ == "__main__":
       coros_db.saveActivity(activity_id, sport_type)
 
 
-
   un_sync_list = coros_db.getUnSyncActivity()
   if un_sync_list == None or len(un_sync_list) == 0:
       exit()
@@ -80,7 +80,7 @@ if __name__ == "__main__":
       upload_status = garminClient.upload_activity(file_path)
       print(f"{id}.fit upload status {upload_status}")
       if upload_status in ("SUCCESS", "DUPLICATE_ACTIVITY"):
-        coros_db.updateSyncStatus(id)
+        coros_db.updateSyncStatus(id, calculate_md5_file(file_path))
       
     except Exception as err:
       print(err)
