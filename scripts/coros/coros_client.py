@@ -7,7 +7,7 @@ import certifi
 
 from coros.region_config import REGIONCONFIG
 from coros.sts_config import STS_CONFIG
-from coros_db import CorosDB
+from coros.coros_db import CorosDB
 
 class CorosClient:
     

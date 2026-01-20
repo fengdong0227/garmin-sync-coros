@@ -67,7 +67,7 @@ class CorosDB:
               is_sync_garmin INTEGER NOT NULL  DEFAULT 0,
               create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
               update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-              fit_md5 text,
+              fit_md5 text
           ) 
 
           '''
