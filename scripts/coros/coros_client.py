@@ -1,5 +1,3 @@
-import os
-
 import urllib3
 import json
 import hashlib
@@ -9,8 +7,7 @@ import certifi
 
 from coros.region_config import REGIONCONFIG
 from coros.sts_config import STS_CONFIG
-from coros.coros_db import CorosDB
-from config import DB_DIR, COROS_FIT_DIR
+
 
 class CorosClient:
 
@@ -60,16 +57,7 @@ class CorosClient:
         self.teamapi = REGIONCONFIG[self.regionId]['teamapi']
 
     ## 上传运动
-    def uploadActivity(self, oss_object, md5, fileName, size, fit_md5):
-        ## 建立DB链接
-        coros_db = CorosDB('coros.db')
-        ## 初始化DB位置和下载文件位置
-        init(coros_db)
-        exist = coros_db.getByFitMd5(fit_md5)
-        if exist:
-            print(f"不再上传重复数据,文件名: {fileName}")
-            return True
-
+    def uploadActivity(self, oss_object, md5, fileName, size):
         ## 判断Token 是否为空
         if self.accessToken == None:
             self.login()
@@ -183,12 +171,3 @@ class CorosActivityUploadError(Exception):
         """Initialize."""
         super(CorosActivityUploadError, self).__init__(status)
         self.status = status
-
-def init(coros_db):
-    ## 判断RQ数据库是否存在
-    print(os.path.join(DB_DIR, coros_db.coros_db_name))
-    if not os.path.exists(os.path.join(DB_DIR, coros_db.coros_db_name)):
-        ## 初始化建表
-        coros_db.initDB()
-    if not os.path.exists(COROS_FIT_DIR):
-        os.mkdir(COROS_FIT_DIR)

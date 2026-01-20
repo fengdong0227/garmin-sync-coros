@@ -11,7 +11,7 @@ from garmin.garmin_db import GarminDB
 from coros.coros_client import CorosClient
 from oss.ali_oss_client import AliOssClient
 from oss.aws_oss_client import AwsOssClient
-from utils.md5_utils import calculate_md5_file, get_md5_of_file_in_zip
+from utils.md5_utils import calculate_md5_file
 
 SYNC_CONFIG = {
     'GARMIN_AUTH_DOMAIN': '',
@@ -80,12 +80,10 @@ if __name__ == "__main__":
       file_path = os.path.join(GARMIN_FIT_DIR, f"{un_sync_id}.zip")
       with open(file_path, "wb") as fb:
           fb.write(file)
-      fit_md5 = get_md5_of_file_in_zip(file_path, f"{un_sync_id}_ACTIVITY.fit")
 
       un_sync_info = {
         "un_sync_id": un_sync_id,
         "file_path": file_path,
-        "fit_md5": fit_md5
       }
 
       file_path_list.append(un_sync_info)
@@ -102,10 +100,9 @@ if __name__ == "__main__":
          client = AwsOssClient()
       file_path = un_sync_info["file_path"]
       un_sync_id = un_sync_info["un_sync_id"]
-      fit_md5 = un_sync_info["fit_md5"]
       oss_obj = client.multipart_upload(file_path,  f"{corosClient.userId}/{calculate_md5_file(file_path)}.zip")
       size = os.path.getsize(file_path)
-      upload_result = corosClient.uploadActivity(f"{file_path}", calculate_md5_file(file_path), f"{un_sync_id}.zip", size, fit_md5)
+      upload_result = corosClient.uploadActivity(f"fit_zip/{corosClient.userId}/{calculate_md5_file(file_path)}.zip", calculate_md5_file(file_path), f"{un_sync_id}.zip", size)
       if upload_result:
           garmin_db.updateSyncStatus(un_sync_id)
     except Exception as err:
