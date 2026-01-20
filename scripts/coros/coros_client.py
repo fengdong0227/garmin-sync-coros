@@ -1,3 +1,5 @@
+import os
+
 import urllib3
 import json
 import hashlib
@@ -8,19 +10,21 @@ import certifi
 from coros.region_config import REGIONCONFIG
 from coros.sts_config import STS_CONFIG
 from coros.coros_db import CorosDB
+from config import DB_DIR, COROS_FIT_DIR
 
 class CorosClient:
-    
-    def __init__(self, email, password) -> None:
-        
+
+    def __init__(self, email, password, newest_num) -> None:
+
         self.email = email
         self.password = password
+        self.newestNum = int(newest_num)
         self.req = urllib3.PoolManager(cert_reqs='CERT_REQUIRED', ca_certs=certifi.where())
         self.accessToken = None
         self.userId = None
         self.regionId = None
         self.teamapi = None
-    
+
     ## 登录接口
     def login(self):
         ## default use com login url
@@ -59,7 +63,6 @@ class CorosClient:
     def uploadActivity(self, oss_object, md5, fileName, size, fit_md5):
         ## 建立DB链接
         coros_db = CorosDB('coros.db')
-        from coros_sync_garmin import init
         ## 初始化DB位置和下载文件位置
         init(coros_db)
         exist = coros_db.getByFitMd5(fit_md5)
@@ -77,7 +80,7 @@ class CorosClient:
           "Accept":       "application/json, text/plain, */*",
           "accesstoken": self.accessToken,
         }
-     
+
         try:
           bucket = STS_CONFIG[self.regionId]["bucket"]
           serviceName = STS_CONFIG[self.regionId]["service"]
@@ -98,7 +101,7 @@ class CorosClient:
           else:
              return False
         except Exception as err:
-            exit() 
+            exit()
 
     def getActivities(self, size:int, page:int):
         self.checkToken()
@@ -116,21 +119,26 @@ class CorosClient:
           response = json.loads(response.data)
           return response
         except Exception as err:
-            exit() 
+            exit()
      ## 获取所有运动
-    def getAllActivities(self): 
+    def getAllActivities(self):
       all_activities = []
       size = 200
       page = 1
+      if 0 < self.newestNum < 100:
+          size = self.newestNum
       while(True):
         activities = self.getActivities(size, page)
+        if size > 0:
+          all_activities.extend(activities['data']['dataList'])
+          return all_activities
         totalPage = activities['data']['totalPage']
         if totalPage >= page:
           all_activities.extend(activities['data']['dataList'])
         else:
           return all_activities
         page += 1
-    
+
 
     def downloadActivitie(self, id, sport_type):
        self.checkToken()
@@ -154,7 +162,7 @@ class CorosClient:
               headers=headers
           )
        except Exception as err:
-            exit() 
+            exit()
        pass
 
     ## 检查token是否有效
@@ -175,3 +183,12 @@ class CorosActivityUploadError(Exception):
         """Initialize."""
         super(CorosActivityUploadError, self).__init__(status)
         self.status = status
+
+def init(coros_db):
+    ## 判断RQ数据库是否存在
+    print(os.path.join(DB_DIR, coros_db.coros_db_name))
+    if not os.path.exists(os.path.join(DB_DIR, coros_db.coros_db_name)):
+        ## 初始化建表
+        coros_db.initDB()
+    if not os.path.exists(COROS_FIT_DIR):
+        os.mkdir(COROS_FIT_DIR)

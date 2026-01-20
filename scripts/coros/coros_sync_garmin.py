@@ -19,6 +19,7 @@ SYNC_CONFIG = {
     'GARMIN_NEWEST_NUM': 0,
     "COROS_EMAIL": '',
     "COROS_PASSWORD": '',
+    "COROS_NEWEST_NUM": 10,
 }
 
 def init(coros_db):
@@ -40,7 +41,8 @@ if __name__ == "__main__":
 
   COROS_EMAIL = SYNC_CONFIG["COROS_EMAIL"]
   COROS_PASSWORD = SYNC_CONFIG["COROS_PASSWORD"]
-  corosClient = CorosClient(COROS_EMAIL, COROS_PASSWORD)
+  COROS_NEWEST_NUM = SYNC_CONFIG["COROS_NEWEST_NUM"]
+  corosClient = CorosClient(COROS_EMAIL, COROS_PASSWORD, COROS_NEWEST_NUM)
 
   GARMIN_EMAIL = SYNC_CONFIG["GARMIN_EMAIL"]
   GARMIN_PASSWORD = SYNC_CONFIG["GARMIN_PASSWORD"]
@@ -73,6 +75,7 @@ if __name__ == "__main__":
     try:
       id = un_sync["id"]
       sport_type = un_sync["sportType"]
+      print(f"coros activityId:{id}, sportType:{sport_type}")
       file = corosClient.downloadActivitie(id, sport_type)
       file_path = os.path.join(COROS_FIT_DIR, f"{id}.fit")
       with open(file_path, "wb") as fb:
