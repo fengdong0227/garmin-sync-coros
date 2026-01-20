@@ -1,9 +1,14 @@
 # 如果出现无法同步请检查下代码是否最新如果非最新请重新fork sync代码后删除db/garmin.db文件重跑一遍！！！
 ## 致谢
+- 本脚本来自@[[XiaoSi Hwang](https://github.com/XiaoSiHwang/garmin-sync-coros)]的项目,在此非常感谢！！
 - 本脚本佳明模块代码来自@[yihong0618](https://github.com/yihong0618) 的 [running_page](https://github.com/yihong0618/running_page) 个人跑步主页项目,在此非常感谢@[yihong0618](https://github.com/yihong0618)大佬的无私奉献！！！
 
 ## DeepWiki源码解析
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/XiaoSiHwang/garmin-sync-coros)
+
+## 功能
+本次更新主要解决 当高驰和佳明设备同时使用时，两方数据互传后，高驰会出现重复活动的问题。(高驰的活动上传接口暂时没有重复数据的拦截，而佳明有)。
+同时增加高驰最新数据的自定义获取
 
 ## 注意
 由于高驰平台只允许单设备登录，同步期间如果打开网页会影响到数据同步导致同步失败，同步期间切记不要打开网页。
@@ -17,6 +22,7 @@
 | GARMIN_NEWEST_NUM  |            最新记录条数            | (默认0，可写大于0) |
 |    COROS_EMAIL     |           高驰 登录邮箱            |                    |
 |   COROS_PASSWORD   |             高驰 密码              |                    |
+| COROS_NEWEST_NUM   |            最新记录条数            | (默认0，可写大于0) |
 
 ## Github配置步骤
 ### 1.参数配置

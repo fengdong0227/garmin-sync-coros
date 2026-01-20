@@ -19,7 +19,7 @@ SYNC_CONFIG = {
     'GARMIN_NEWEST_NUM': 0,
     "COROS_EMAIL": '',
     "COROS_PASSWORD": '',
-    "COROS_NEWEST_NUM": 10,
+    "COROS_NEWEST_NUM": 0,
 }
 
 def init(coros_db):
