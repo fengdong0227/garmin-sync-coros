@@ -46,10 +46,10 @@ class CorosDB:
                     activity_list.append(activity)
                 return activity_list
             
-    def updateSyncStatus(self, activity_id:int, fit_md5:str):
-        update_sql = "update coros_activity set is_sync_garmin = 1, fit_md5 = ? WHERE activity_id = ?"
+    def updateSyncStatus(self, activity_id:int):
+        update_sql = "update coros_activity set is_sync_garmin = 1 WHERE activity_id = ?"
         with SqliteDB(self._coros_db_name) as db:
-          db.execute(update_sql, (fit_md5, activity_id,))
+          db.execute(update_sql, (activity_id,))
     
     def updateExceptionSyncStatus(self, activity_id:int):
         update_sql = "update coros_activity set is_sync_garmin = 2 WHERE activity_id = ?"

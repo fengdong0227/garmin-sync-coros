@@ -83,7 +83,7 @@ if __name__ == "__main__":
       upload_status = garminClient.upload_activity(file_path)
       print(f"{id}.fit upload status {upload_status}")
       if upload_status in ("SUCCESS", "DUPLICATE_ACTIVITY"):
-        coros_db.updateSyncStatus(id, calculate_md5_file(file_path))
+        coros_db.updateSyncStatus(id)
       
     except Exception as err:
       print(err)
