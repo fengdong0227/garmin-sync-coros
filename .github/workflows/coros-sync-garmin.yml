@@ -15,7 +15,7 @@ env:
   ## Coros配置
   COROS_EMAIL: ${{ secrets.COROS_EMAIL }}
   COROS_PASSWORD: ${{ secrets.COROS_PASSWORD }}
-  COROS_NEWEST_NUM: $${{ secrets.COROS_NEWEST_NUM }}
+  COROS_NEWEST_NUM: ${{ secrets.COROS_NEWEST_NUM }}
   ### 按需选择，如果选择 garmin_to_coros 佳明同步高驰
   ### 如果选择 coros_to_garmin 高驰同步佳明
   RUN_TYPE: coros_to_garmin # garmin_to_coros 佳明同步高驰、 coros_to_garmin
