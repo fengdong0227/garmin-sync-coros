@@ -1,0 +1,4 @@
+# 定时(8-23点每小时整点)将高驰的数据同步给佳明
+0 8-23 * * * /your/path/to/python /your/path/to/script.py >> /your/path/to/log.log 2>&1
+# 定时(8-23点每小时整半点)将佳明的数据同步给高驰
+30 8-23 * * * /your/path/to/python /your/path/to/script.py >> /your/path/to/log.log 2>&1
