@@ -25,8 +25,8 @@ garminClient = GarminClient(GARMIN_EMAIL, GARMIN_PASSWORD, GARMIN_AUTH_DOMAIN)
 
 def init(coros_db):
     ## 判断RQ数据库是否存在
-    print(os.path.join(DB_DIR, coros_db.coros_db_name))
-    if not os.path.exists(os.path.join(DB_DIR, coros_db.coros_db_name)):
+    print(os.path.join(DB_DIR, coros_db.db_name))
+    if not os.path.exists(os.path.join(DB_DIR, coros_db.db_name)):
         ## 初始化建表
         coros_db.initDB()
     if not os.path.exists(COROS_FIT_DIR):

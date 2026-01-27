@@ -24,8 +24,8 @@ SYNC_CONFIG = {
 
 def init(coros_db):
     ## 判断RQ数据库是否存在
-    print(os.path.join(DB_DIR, coros_db.coros_db_name))
-    if not os.path.exists(os.path.join(DB_DIR, coros_db.coros_db_name)):
+    print(os.path.join(DB_DIR, coros_db.db_name))
+    if not os.path.exists(os.path.join(DB_DIR, coros_db.db_name)):
         ## 初始化建表
         coros_db.initDB()
     if not os.path.exists(COROS_FIT_DIR):
@@ -83,7 +83,7 @@ if __name__ == "__main__":
       upload_status = garminClient.upload_activity(file_path)
       print(f"{id}.fit upload status {upload_status}")
       if upload_status in ("SUCCESS", "DUPLICATE_ACTIVITY"):
-        coros_db.updateSyncStatus(id)
+        coros_db.updateSyncStatus(id, calculate_md5_file(file_path))
       
     except Exception as err:
       print(err)

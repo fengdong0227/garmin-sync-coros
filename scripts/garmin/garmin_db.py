@@ -10,7 +10,7 @@ class GarminDB:
         self._garmin_db_name = garmin_db_name
 
     @property
-    def garmin_db_name(self):
+    def db_name(self):
         return self._garmin_db_name
 
      ## 保存Stryd运动信息

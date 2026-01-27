@@ -1,5 +1,5 @@
 import os
-import sys 
+import sys
 
 CURRENT_DIR = os.path.split(os.path.abspath(__file__))[0]  # 当前目录
 config_path = CURRENT_DIR.rsplit('/', 1)[0]  # 上三级目录
@@ -9,9 +9,10 @@ from config import DB_DIR, GARMIN_FIT_DIR
 from garmin.garmin_client import GarminClient
 from garmin.garmin_db import GarminDB
 from coros.coros_client import CorosClient
+from coros.coros_db import CorosDB
 from oss.ali_oss_client import AliOssClient
 from oss.aws_oss_client import AwsOssClient
-from utils.md5_utils import calculate_md5_file
+from utils.md5_utils import calculate_md5_file, get_md5_of_file_in_zip
 
 SYNC_CONFIG = {
     'GARMIN_AUTH_DOMAIN': '',
@@ -26,8 +27,8 @@ SYNC_CONFIG = {
 
 def init(coros_db):
     ## 判断RQ数据库是否存在
-    print(os.path.join(DB_DIR, coros_db.garmin_db_name))
-    if not os.path.exists(os.path.join(DB_DIR, coros_db.garmin_db_name)):
+    print(os.path.join(DB_DIR, coros_db.db_name))
+    if not os.path.exists(os.path.join(DB_DIR, coros_db.db_name)):
         ## 初始化建表
         coros_db.initDB()
     if not os.path.exists(GARMIN_FIT_DIR):
@@ -47,6 +48,8 @@ if __name__ == "__main__":
   garmin_db = GarminDB(db_name)
   ## 初始化DB位置和下载文件位置
   init(garmin_db)
+  coros_db = CorosDB("coros.db")
+  init(coros_db)
 
   GARMIN_EMAIL = SYNC_CONFIG["GARMIN_EMAIL"]
   GARMIN_PASSWORD = SYNC_CONFIG["GARMIN_PASSWORD"]
@@ -80,10 +83,12 @@ if __name__ == "__main__":
       file_path = os.path.join(GARMIN_FIT_DIR, f"{un_sync_id}.zip")
       with open(file_path, "wb") as fb:
           fb.write(file)
+      fit_md5 = get_md5_of_file_in_zip(file_path, f"{un_sync_id}_ACTIVITY.fit")
 
       un_sync_info = {
         "un_sync_id": un_sync_id,
         "file_path": file_path,
+        "fit_md5": fit_md5
       }
 
       file_path_list.append(un_sync_info)
@@ -92,6 +97,13 @@ if __name__ == "__main__":
       print(err)
   for un_sync_info in file_path_list:
     try:
+      fit_md5 = un_sync_info["fit_md5"]
+      un_sync_id = un_sync_info["un_sync_id"]
+      is_exist = coros_db.activityIsExist(fit_md5)
+      if is_exist:
+          print(f"activity {un_sync_id} 已经存在")
+          garmin_db.updateSyncStatus(un_sync_id)
+          continue
       client = None
       ## 中国区使用阿里云OSS
       if corosClient.regionId == 2:
@@ -99,7 +111,7 @@ if __name__ == "__main__":
       elif corosClient.regionId == 1 or corosClient.regionId == 3:
          client = AwsOssClient()
       file_path = un_sync_info["file_path"]
-      un_sync_id = un_sync_info["un_sync_id"]
+
       oss_obj = client.multipart_upload(file_path,  f"{corosClient.userId}/{calculate_md5_file(file_path)}.zip")
       size = os.path.getsize(file_path)
       upload_result = corosClient.uploadActivity(f"fit_zip/{corosClient.userId}/{calculate_md5_file(file_path)}.zip", calculate_md5_file(file_path), f"{un_sync_id}.zip", size)
