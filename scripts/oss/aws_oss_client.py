@@ -2,6 +2,7 @@ import urllib3
 import json
 import boto3
 import certifi
+import logging
 
 from boto3.s3.transfer import TransferConfig
 
@@ -62,9 +63,9 @@ class AwsOssClient:
               Key=f"fit_zip/{fileName}",
               Config=config
           )
-          print(f"File {fileName} uploaded successfully!")
+          logging.info(f"File {fileName} uploaded successfully!")
       except Exception as e:
-          print(f"Upload failed: {e}")
+          logging.error(f"Upload failed: {e}")
 
 
 

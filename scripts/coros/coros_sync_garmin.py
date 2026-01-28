@@ -1,5 +1,6 @@
 import os
 import sys
+import logging
 
 CURRENT_DIR = os.path.split(os.path.abspath(__file__))[0]  # 当前目录
 config_path = CURRENT_DIR.rsplit('/', 1)[0]  # 上三级目录
@@ -22,9 +23,18 @@ SYNC_CONFIG = {
     "COROS_NEWEST_NUM": 0,
 }
 
+
+logging.basicConfig(
+    filename='/Users/luohangqi/PycharmProjects/garmin-sync-coros/log/coros_to_garmin.log',
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+
+
 def init(coros_db):
     ## 判断RQ数据库是否存在
-    print(os.path.join(DB_DIR, coros_db.db_name))
+    logging.info(f"数据库文件为:{os.path.join(DB_DIR, coros_db.db_name)}")
     if not os.path.exists(os.path.join(DB_DIR, coros_db.db_name)):
         ## 初始化建表
         coros_db.initDB()
@@ -75,17 +85,17 @@ if __name__ == "__main__":
     try:
       id = un_sync["id"]
       sport_type = un_sync["sportType"]
-      print(f"coros activityId:{id}, sportType:{sport_type}")
+      logging.info(f"coros activityId:{id}, sportType:{sport_type}")
       file = corosClient.downloadActivitie(id, sport_type)
       file_path = os.path.join(COROS_FIT_DIR, f"{id}.fit")
       with open(file_path, "wb") as fb:
           fb.write(file.data)
       upload_status = garminClient.upload_activity(file_path)
-      print(f"{id}.fit upload status {upload_status}")
+      logging.info(f"{id}.fit upload status {upload_status}")
       if upload_status in ("SUCCESS", "DUPLICATE_ACTIVITY"):
         coros_db.updateSyncStatus(id, calculate_md5_file(file_path))
       
     except Exception as err:
-      print(err)
+      logging.error(f"同步运动数据失败.{err}")
       coros_db.updateExceptionSyncStatus(un_sync)
       exit()

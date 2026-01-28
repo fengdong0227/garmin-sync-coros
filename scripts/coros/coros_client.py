@@ -1,7 +1,7 @@
 import urllib3
 import json
 import hashlib
-
+import logging
 import certifi
 
 
@@ -75,7 +75,7 @@ class CorosClient:
           data = {"source":1,"timezone":32,"bucket":f"{bucket}","md5":f"{md5}","size":size,"object":f"{oss_object}","serviceName":f"{serviceName}","oriFileName":f"{fileName}"}
           json_data = json.dumps(data)
           json_str = str(json_data)
-          print(json_str)
+          logging.info(f"请求参数: {json_str}")
           response = self.req.request(
               method = 'POST',
               url=upload_url,
@@ -83,7 +83,7 @@ class CorosClient:
               headers=headers
           )
           upload_response = json.loads(response.data)
-          print(upload_response)
+          logging.info(f"响应信息: {upload_response}")
           if upload_response["data"].get("status") == 2 and  upload_response["result"] == "0000":
              return True
           else:

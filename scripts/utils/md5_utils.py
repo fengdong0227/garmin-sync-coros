@@ -1,5 +1,6 @@
 import hashlib
 import zipfile
+import logging
 
 
 def calculate_md5_file(file_path):
@@ -20,7 +21,7 @@ def get_md5_of_file_in_zip(zip_path, file_name_in_zip):
         with zipfile.ZipFile(zip_path, 'r') as zf:
             # 检查文件是否存在
             if file_name_in_zip not in zf.namelist():
-                print(f"错误: ZIP 包中找不到文件 '{file_name_in_zip}'")
+                logging.error(f"错误: ZIP 包中找不到文件 '{file_name_in_zip}'")
                 return None
 
             # 打开 ZIP 包内的文件
@@ -32,8 +33,8 @@ def get_md5_of_file_in_zip(zip_path, file_name_in_zip):
         return md5_hash.hexdigest()
 
     except zipfile.BadZipFile:
-        print("错误: 这不是一个有效的 ZIP 文件")
+        logging.error("错误: 这不是一个有效的 ZIP 文件")
         return None
     except Exception as e:
-        print(f"发生错误: {e}")
+        logging.error(f"发生错误: {e}")
         return None

@@ -1,5 +1,6 @@
 import os
 import sys
+import logging
 
 CURRENT_DIR = os.path.split(os.path.abspath(__file__))[0]  # 当前目录
 config_path = CURRENT_DIR.rsplit('/', 1)[0]  # 上三级目录
@@ -14,6 +15,14 @@ from oss.ali_oss_client import AliOssClient
 from oss.aws_oss_client import AwsOssClient
 from utils.md5_utils import calculate_md5_file, get_md5_of_file_in_zip
 
+
+logging.basicConfig(
+    filename='/Users/luohangqi/PycharmProjects/garmin-sync-coros/log/garmin_to_coros.log',
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+
 SYNC_CONFIG = {
     'GARMIN_AUTH_DOMAIN': '',
     'GARMIN_EMAIL': '',
@@ -27,7 +36,7 @@ SYNC_CONFIG = {
 
 def init(coros_db):
     ## 判断RQ数据库是否存在
-    print(os.path.join(DB_DIR, coros_db.db_name))
+    logging.info(f"数据库目录为:{os.path.join(DB_DIR, coros_db.db_name)}")
     if not os.path.exists(os.path.join(DB_DIR, coros_db.db_name)):
         ## 初始化建表
         coros_db.initDB()
@@ -94,14 +103,14 @@ if __name__ == "__main__":
       file_path_list.append(un_sync_info)
       
     except Exception as err:
-      print(err)
+      logging.error(f"获取未同步的数据出现异常:{err}")
   for un_sync_info in file_path_list:
     try:
       fit_md5 = un_sync_info["fit_md5"]
       un_sync_id = un_sync_info["un_sync_id"]
       is_exist = coros_db.activityIsExist(fit_md5)
       if is_exist:
-          print(f"activity {un_sync_id} 已经存在")
+          logging.info(f"activity {un_sync_id} 已经存在")
           garmin_db.updateSyncStatus(un_sync_id)
           continue
       client = None
@@ -118,6 +127,6 @@ if __name__ == "__main__":
       if upload_result:
           garmin_db.updateSyncStatus(un_sync_id)
     except Exception as err:
-      print(err)
+      logging.error(f"同步运动数据失败:{err}")
       garmin_db.updateExceptionSyncStatus(un_sync_id)
       exit()

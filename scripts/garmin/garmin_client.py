@@ -126,7 +126,7 @@ class GarminClient:
           elif res_code == 409 and result.get("detailedImportResult").get("failures")[0].get('messages')[0].get('content') == "Duplicate Activity.":
               status = "DUPLICATE_ACTIVITY" 
        except Exception as e:
-            print(e)
+            logger.error(e)
             status = "UPLOAD_EXCEPTION"
        finally:
             return status

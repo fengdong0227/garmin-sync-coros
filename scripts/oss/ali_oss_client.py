@@ -3,6 +3,7 @@ import json
 import oss2
 import os
 import certifi
+import logging
 
 from oss2 import SizedFileAdapter, determine_part_size
 from oss2.models import PartInfo
@@ -47,7 +48,7 @@ class AliOssClient:
     
     def multipart_upload(self, filePath, fileName):
         key = f"fit_zip/{fileName}"
-        print(key)
+        logging.info(key)
         init_multipart_upload_result = self.client.init_multipart_upload(key)
         if init_multipart_upload_result.status != 200:
             raise AliOssError("初始化阿里云分片上传异常")
