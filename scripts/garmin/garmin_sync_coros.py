@@ -15,9 +15,9 @@ from oss.ali_oss_client import AliOssClient
 from oss.aws_oss_client import AwsOssClient
 from utils.md5_utils import calculate_md5_file, get_md5_of_file_in_zip
 
-
+os.makedirs(LOG_DIR, exist_ok=True)
 logging.basicConfig(
-    filename=LOG_DIR + '/garmin_to_coros.log',
+    filename=os.path.join(LOG_DIR, 'garmin_to_coros.log'),
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'

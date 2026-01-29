@@ -12,7 +12,7 @@ from coros_db import CorosDB
 from garmin.garmin_client import GarminClient
 from utils.md5_utils import calculate_md5_file
 
-
+os.makedirs(LOG_DIR, exist_ok=True)
 SYNC_CONFIG = {
     'GARMIN_AUTH_DOMAIN': '',
     'GARMIN_EMAIL': '',
@@ -24,7 +24,7 @@ SYNC_CONFIG = {
 }
 
 logging.basicConfig(
-    filename=LOG_DIR + '/coros_to_garmin.log',
+    filename=os.path.join(LOG_DIR,'coros_to_garmin.log'),
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'
