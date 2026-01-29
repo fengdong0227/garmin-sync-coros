@@ -6,7 +6,7 @@ CURRENT_DIR = os.path.split(os.path.abspath(__file__))[0]  # 当前目录
 config_path = CURRENT_DIR.rsplit('/', 1)[0]  # 上三级目录
 sys.path.append(config_path)
 
-from config import DB_DIR, GARMIN_FIT_DIR
+from config import DB_DIR, GARMIN_FIT_DIR, LOG_DIR
 from garmin.garmin_client import GarminClient
 from garmin.garmin_db import GarminDB
 from coros.coros_client import CorosClient
@@ -17,7 +17,7 @@ from utils.md5_utils import calculate_md5_file, get_md5_of_file_in_zip
 
 
 logging.basicConfig(
-    filename='/Users/luohangqi/PycharmProjects/garmin-sync-coros/log/garmin_to_coros.log',
+    filename=LOG_DIR + '/garmin_to_coros.log',
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'

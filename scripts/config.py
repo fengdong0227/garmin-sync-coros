@@ -12,8 +12,9 @@ for k in SYS_CONFIG:
 current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 
-
 GARMIN_FIT_DIR = os.path.join(parent, "garmin-fit")
 COROS_FIT_DIR = os.path.join(parent, "coros-fit")
 
-DB_DIR =  os.path.join(parent, "db")
+DB_DIR = os.path.join(parent, "db")
+
+LOG_DIR = os.path.join(parent, "log")

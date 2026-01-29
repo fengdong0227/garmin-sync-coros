@@ -7,7 +7,7 @@ config_path = CURRENT_DIR.rsplit('/', 1)[0]  # 上三级目录
 sys.path.append(config_path)
 
 from coros_client import CorosClient
-from config  import DB_DIR, COROS_FIT_DIR
+from config  import DB_DIR, COROS_FIT_DIR, LOG_DIR
 from coros_db import CorosDB
 from garmin.garmin_client import GarminClient
 from utils.md5_utils import calculate_md5_file
@@ -23,9 +23,8 @@ SYNC_CONFIG = {
     "COROS_NEWEST_NUM": 0,
 }
 
-
 logging.basicConfig(
-    filename='/Users/luohangqi/PycharmProjects/garmin-sync-coros/log/coros_to_garmin.log',
+    filename=LOG_DIR + '/coros_to_garmin.log',
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'
@@ -94,7 +93,7 @@ if __name__ == "__main__":
       logging.info(f"{id}.fit upload status {upload_status}")
       if upload_status in ("SUCCESS", "DUPLICATE_ACTIVITY"):
         coros_db.updateSyncStatus(id, calculate_md5_file(file_path))
-      
+
     except Exception as err:
       logging.error(f"同步运动数据失败.{err}")
       coros_db.updateExceptionSyncStatus(un_sync)
