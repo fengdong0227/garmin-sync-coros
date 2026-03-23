@@ -1,4 +1,7 @@
-# 定时(8-23点每小时整点)将高驰的数据同步给佳明
-0 8-23 * * * /your/path/to/python /your/path/to/scripts/coros/coros_sync_garmin.py >> /your/path/to/coros_to_garmin.log 2>&1
-# 定时(8-23点每小时整半点)将佳明的数据同步给高驰
-30 8-23 * * * /your/path/to/python /your/path/to/scripts/garmin/garmin_sync_coros >> /your/path/to/garmin_to_coros.log 2>&1
+#SHELL=/bin/bash
+#PATH=/usr/local/python3.12/bin:/usr/local/bin:/usr/bin:/bin
+
+# 定时(每天10:30)将高驰的数据同步给佳明
+30 10-12 * * * /Users/luohangqi/PycharmProjects/garmin-sync-coros/.venv/bin/python /Users/luohangqi/PycharmProjects/garmin-sync-coros/scripts/coros/coros_sync_garmin.py >> /Users/luohangqi/PycharmProjects/garmin-sync-coros/log/coros_to_garmin.log 2>&1
+# 定时(每天10:10)将佳明的数据同步给高驰
+10 10-12 * * * /Users/luohangqi/PycharmProjects/garmin-sync-coros/.venv/bin/python /Users/luohangqi/PycharmProjects/garmin-sync-coros/scripts/garmin/garmin_sync_coros.py >> /Users/luohangqi/PycharmProjects/garmin-sync-coros/log/garmin_to_coros.log 2>&1

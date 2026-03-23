@@ -12,7 +12,7 @@ from coros_db import CorosDB
 from garmin.garmin_client import GarminClient
 from utils.md5_utils import calculate_md5_file
 
-os.makedirs(LOG_DIR, exist_ok=True)
+
 SYNC_CONFIG = {
     'GARMIN_AUTH_DOMAIN': '',
     'GARMIN_EMAIL': '',
@@ -23,6 +23,7 @@ SYNC_CONFIG = {
     "COROS_NEWEST_NUM": 0,
 }
 
+os.makedirs(LOG_DIR, exist_ok=True)
 logging.basicConfig(
     filename=os.path.join(LOG_DIR,'coros_to_garmin.log'),
     level=logging.INFO,
@@ -81,20 +82,20 @@ if __name__ == "__main__":
   if un_sync_list == None or len(un_sync_list) == 0:
       exit()
   for un_sync in un_sync_list:
-    try:
       id = un_sync["id"]
-      sport_type = un_sync["sportType"]
-      logging.info(f"coros activityId:{id}, sportType:{sport_type}")
-      file = corosClient.downloadActivitie(id, sport_type)
-      file_path = os.path.join(COROS_FIT_DIR, f"{id}.fit")
-      with open(file_path, "wb") as fb:
-          fb.write(file.data)
-      upload_status = garminClient.upload_activity(file_path)
-      logging.info(f"{id}.fit upload status {upload_status}")
-      if upload_status in ("SUCCESS", "DUPLICATE_ACTIVITY"):
-        coros_db.updateSyncStatus(id, calculate_md5_file(file_path))
+      try:
+          sport_type = un_sync["sportType"]
+          logging.info(f"coros activityId:{id}, sportType:{sport_type}")
+          file = corosClient.downloadActivitie(id, sport_type)
+          file_path = os.path.join(COROS_FIT_DIR, f"{id}.fit")
+          with open(file_path, "wb") as fb:
+              fb.write(file.data)
+          upload_status = garminClient.upload_activity(file_path)
+          logging.info(f"{id}.fit upload status {upload_status}")
+          if upload_status in ("SUCCESS", "DUPLICATE_ACTIVITY"):
+              coros_db.updateSyncStatus(id, calculate_md5_file(file_path))
 
-    except Exception as err:
-      logging.error(f"同步运动数据失败.{err}")
-      coros_db.updateExceptionSyncStatus(un_sync)
-      exit()
+      except Exception as err:
+          logging.error(f"同步运动数据失败.{err}")
+          coros_db.updateExceptionSyncStatus(id)
+          exit()
