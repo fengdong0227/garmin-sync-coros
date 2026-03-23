@@ -34,6 +34,7 @@ logging.basicConfig(
 
 def init(coros_db):
     ## 判断RQ数据库是否存在
+    print(f"数据库文件为:{os.path.join(DB_DIR, coros_db.db_name)}")
     logging.info(f"数据库文件为:{os.path.join(DB_DIR, coros_db.db_name)}")
     if not os.path.exists(os.path.join(DB_DIR, coros_db.db_name)):
         ## 初始化建表
@@ -85,17 +86,20 @@ if __name__ == "__main__":
       id = un_sync["id"]
       try:
           sport_type = un_sync["sportType"]
+          print(f"coros activityId:{id}, sportType:{sport_type}")
           logging.info(f"coros activityId:{id}, sportType:{sport_type}")
           file = corosClient.downloadActivitie(id, sport_type)
           file_path = os.path.join(COROS_FIT_DIR, f"{id}.fit")
           with open(file_path, "wb") as fb:
               fb.write(file.data)
           upload_status = garminClient.upload_activity(file_path)
+          print(f"{id}.fit upload status {upload_status}")
           logging.info(f"{id}.fit upload status {upload_status}")
           if upload_status in ("SUCCESS", "DUPLICATE_ACTIVITY"):
               coros_db.updateSyncStatus(id, calculate_md5_file(file_path))
 
       except Exception as err:
+          print(f"同步运动数据失败.{err}")
           logging.error(f"同步运动数据失败.{err}")
           coros_db.updateExceptionSyncStatus(id)
           exit()

@@ -36,6 +36,7 @@ SYNC_CONFIG = {
 
 def init(coros_db):
     ## 判断RQ数据库是否存在
+    print(f"数据库目录为:{os.path.join(DB_DIR, coros_db.db_name)}")
     logging.info(f"数据库目录为:{os.path.join(DB_DIR, coros_db.db_name)}")
     if not os.path.exists(os.path.join(DB_DIR, coros_db.db_name)):
         ## 初始化建表
@@ -104,6 +105,7 @@ if __name__ == "__main__":
       
     except Exception as err:
       logging.error(f"获取未同步的数据出现异常:{err}")
+      print(f"获取未同步的数据出现异常:{err}")
   for un_sync_info in file_path_list:
       un_sync_id = un_sync_info["un_sync_id"]
       try:
@@ -111,6 +113,7 @@ if __name__ == "__main__":
           is_exist = coros_db.activityIsExist(fit_md5)
           if is_exist:
               logging.info(f"activity {un_sync_id} 已经存在")
+              print(f"activity {un_sync_id} 已经存在")
               garmin_db.updateSyncStatus(un_sync_id)
               continue
           client = None
@@ -127,6 +130,7 @@ if __name__ == "__main__":
           if upload_result:
               garmin_db.updateSyncStatus(un_sync_id)
       except Exception as err:
+          print(f"同步运动数据失败:{err}")
           logging.error(f"同步运动数据失败:{err}")
           garmin_db.updateExceptionSyncStatus(un_sync_id)
           exit()
