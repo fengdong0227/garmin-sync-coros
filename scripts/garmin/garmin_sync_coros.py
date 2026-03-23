@@ -105,28 +105,28 @@ if __name__ == "__main__":
     except Exception as err:
       logging.error(f"获取未同步的数据出现异常:{err}")
   for un_sync_info in file_path_list:
-    try:
-      fit_md5 = un_sync_info["fit_md5"]
       un_sync_id = un_sync_info["un_sync_id"]
-      is_exist = coros_db.activityIsExist(fit_md5)
-      if is_exist:
-          logging.info(f"activity {un_sync_id} 已经存在")
-          garmin_db.updateSyncStatus(un_sync_id)
-          continue
-      client = None
-      ## 中国区使用阿里云OSS
-      if corosClient.regionId == 2:
-         client = AliOssClient()
-      elif corosClient.regionId == 1 or corosClient.regionId == 3:
-         client = AwsOssClient()
-      file_path = un_sync_info["file_path"]
+      try:
+          fit_md5 = un_sync_info["fit_md5"]
+          is_exist = coros_db.activityIsExist(fit_md5)
+          if is_exist:
+              logging.info(f"activity {un_sync_id} 已经存在")
+              garmin_db.updateSyncStatus(un_sync_id)
+              continue
+          client = None
+          ## 中国区使用阿里云OSS
+          if corosClient.regionId == 2:
+              client = AliOssClient()
+          elif corosClient.regionId == 1 or corosClient.regionId == 3:
+              client = AwsOssClient()
+          file_path = un_sync_info["file_path"]
 
-      oss_obj = client.multipart_upload(file_path,  f"{corosClient.userId}/{calculate_md5_file(file_path)}.zip")
-      size = os.path.getsize(file_path)
-      upload_result = corosClient.uploadActivity(f"fit_zip/{corosClient.userId}/{calculate_md5_file(file_path)}.zip", calculate_md5_file(file_path), f"{un_sync_id}.zip", size)
-      if upload_result:
-          garmin_db.updateSyncStatus(un_sync_id)
-    except Exception as err:
-      logging.error(f"同步运动数据失败:{err}")
-      garmin_db.updateExceptionSyncStatus(un_sync_id)
-      exit()
+          oss_obj = client.multipart_upload(file_path,  f"{corosClient.userId}/{calculate_md5_file(file_path)}.zip")
+          size = os.path.getsize(file_path)
+          upload_result = corosClient.uploadActivity(f"fit_zip/{corosClient.userId}/{calculate_md5_file(file_path)}.zip", calculate_md5_file(file_path), f"{un_sync_id}.zip", size)
+          if upload_result:
+              garmin_db.updateSyncStatus(un_sync_id)
+      except Exception as err:
+          logging.error(f"同步运动数据失败:{err}")
+          garmin_db.updateExceptionSyncStatus(un_sync_id)
+          exit()
