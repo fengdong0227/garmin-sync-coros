@@ -1,0 +1,28 @@
+2026-03-23 22:10:02 - INFO - 数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/garmin.db
+2026-03-23 22:10:02 - INFO - 数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/coros.db
+数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/garmin.db
+数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/coros.db
+Traceback (most recent call last):
+  File "/Users/luohangqi/PycharmProjects/garmin-sync-coros/scripts/garmin/garmin_sync_coros.py", line 75, in <module>
+    corosClient.login()
+  File "/Users/luohangqi/PycharmProjects/garmin-sync-coros/scripts/coros/coros_client.py", line 49, in login
+    raise CorosLoginError("Coros login anomaly, the reason for the anomaly is:" + login_response["message"])
+coros.coros_client.CorosLoginError: Coros login anomaly, the reason for the anomaly is:The login credentials you entered do not match our records.
+2026-03-24 10:10:01 - INFO - 数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/garmin.db
+2026-03-24 10:10:01 - INFO - 数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/coros.db
+数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/garmin.db
+数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/coros.db
+Traceback (most recent call last):
+  File "/Users/luohangqi/PycharmProjects/garmin-sync-coros/scripts/garmin/garmin_sync_coros.py", line 75, in <module>
+    corosClient.login()
+  File "/Users/luohangqi/PycharmProjects/garmin-sync-coros/scripts/coros/coros_client.py", line 49, in login
+    raise CorosLoginError("Coros login anomaly, the reason for the anomaly is:" + login_response["message"])
+coros.coros_client.CorosLoginError: Coros login anomaly, the reason for the anomaly is:The login credentials you entered do not match our records.
+2026-03-24 13:48:42 - INFO - 数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/garmin.db
+2026-03-24 13:48:42 - INFO - 数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/coros.db
+2026-03-24 13:48:43 - WARNING - Garmin is not logging in or the token has expired.
+数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/garmin.db
+数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/coros.db
+2026-03-24 14:29:15 - INFO - 数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/garmin.db
+2026-03-24 14:29:15 - INFO - 数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/coros.db
+2026-03-24 14:29:16 - WARNING - Garmin is not logging in or the token has expired.
