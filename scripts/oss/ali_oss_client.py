@@ -7,7 +7,7 @@ import logging
 
 from oss2 import SizedFileAdapter, determine_part_size
 from oss2.models import PartInfo
-from utils.coros_oss_credients_utils import decode
+from scripts.utils.coros_oss_credients_utils import decode
 
 
 class AliOssClient:

@@ -18,3 +18,4 @@ COROS_FIT_DIR = os.path.join(parent, "coros-fit")
 DB_DIR = os.path.join(parent, "db")
 
 LOG_DIR = os.path.join(parent, "log")
+GARMIN_TOKEN_DIR = os.path.join(parent, "garth")

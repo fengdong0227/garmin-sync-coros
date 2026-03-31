@@ -18,8 +18,8 @@ def test():
     import os
     size = os.path.getsize(last_file) # 文件路径及文件名
     print(size)
-    oss_obj = client.multipart_upload(last_file, f"{calculate_md5_file(last_file)}.zip")
-    upload_result = corosClient.uploadActivity(f"fit_zip/{calculate_md5_file(last_file)}.zip", calculate_md5_file(last_file), "22354343348.zip", size)
+    oss_obj = client.multipart_upload(last_file, f"{corosClient.userId}/{calculate_md5_file(last_file)}.zip")
+    upload_result = corosClient.uploadActivity(f"fit_zip/{corosClient.userId}/{calculate_md5_file(last_file)}.zip", calculate_md5_file(last_file), "22354343348.zip", size)
     print(upload_result)
 
 

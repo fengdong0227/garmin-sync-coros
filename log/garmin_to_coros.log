@@ -26,3 +26,31 @@ coros.coros_client.CorosLoginError: Coros login anomaly, the reason for the anom
 2026-03-24 14:29:15 - INFO - 数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/garmin.db
 2026-03-24 14:29:15 - INFO - 数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/coros.db
 2026-03-24 14:29:16 - WARNING - Garmin is not logging in or the token has expired.
+2026-03-26 11:39:58 - INFO - 数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/garmin.db
+2026-03-26 11:39:58 - INFO - 数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/coros.db
+2026-03-26 11:39:59 - WARNING - Garmin is not logging in or the token has expired.
+2026-03-26 11:40:28 - INFO - 数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/garmin.db
+2026-03-26 11:40:28 - INFO - 数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/coros.db
+2026-03-26 11:40:28 - WARNING - Garmin is not logging in or the token has expired.
+2026-03-31 13:40:43 - INFO - 数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/garmin.db
+2026-03-31 13:40:43 - INFO - 数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/coros.db
+2026-03-31 13:40:43 - INFO - Garmin 配置为国际区 (garmin.com)
+2026-03-31 13:40:43 - WARNING - Garmin is not logging in or the token has expired.
+2026-03-31 13:40:43 - INFO - 尝试从 /Users/luohangqi/PycharmProjects/garmin-sync-coros/garth 加载 Token...
+2026-03-31 13:40:46 - WARNING - Token 验证失败：
+2026-03-31 13:40:46 - INFO - Token 无效或不存在，使用账号密码登录
+2026-03-31 13:40:46 - INFO - 开始登录 Garmin Connect...
+2026-03-31 13:40:51 - INFO - Token 已保存到：/Users/luohangqi/PycharmProjects/garmin-sync-coros/garth
+2026-03-31 13:40:52 - INFO - 登录成功！用户：fengdong0227@163.com
+2026-03-31 13:40:55 - INFO - fit_zip/451612596947140608/f49fca5d89427f9ca1762a17190cd628.zip
+2026-03-31 13:40:56 - INFO - 请求参数: {"source": 1, "timezone": 32, "bucket": "coros-oss", "md5": "f49fca5d89427f9ca1762a17190cd628", "size": 22563, "object": "fit_zip/451612596947140608/f49fca5d89427f9ca1762a17190cd628.zip", "serviceName": "aliyun", "oriFileName": "22354343348.zip"}
+2026-03-31 13:40:58 - INFO - 响应信息: {'apiCode': '8E16FCC7', 'data': {'createTime': '2026-03-31 13:40:57', 'fileUrl': '451612596947140608/f49fca5d89427f9ca1762a17190cd628.zip', 'finishSize': 1, 'id': '476455662230995744', 'idString': '476455662230995744', 'md5': 'f49fca5d89427f9ca1762a17190cd628', 'originalFilename': '22354343348.zip', 'size': 1, 'source': 1, 'status': 2, 'taskImportPredicateSeconds': 3, 'taskImportRemainSeconds': 0, 'timezone': 32, 'unzipPredicateSeconds': 0, 'updateTime': '2026-03-31 13:40:58', 'userId': '451612596947140608'}, 'message': 'OK', 'result': '0000'}
+2026-03-31 13:40:59 - INFO - fit_zip/451612596947140608/5e56e02dab0558e7f0039d2b6735e42c.zip
+2026-03-31 13:40:59 - INFO - 请求参数: {"source": 1, "timezone": 32, "bucket": "coros-oss", "md5": "5e56e02dab0558e7f0039d2b6735e42c", "size": 109657, "object": "fit_zip/451612596947140608/5e56e02dab0558e7f0039d2b6735e42c.zip", "serviceName": "aliyun", "oriFileName": "22311540414.zip"}
+2026-03-31 13:41:07 - INFO - 响应信息: {'apiCode': '8E16FCC7', 'data': {'createTime': '2026-03-31 13:41:00', 'fileUrl': '451612596947140608/5e56e02dab0558e7f0039d2b6735e42c.zip', 'finishSize': 1, 'id': '476455663042593367', 'idString': '476455663042593367', 'md5': '5e56e02dab0558e7f0039d2b6735e42c', 'originalFilename': '22311540414.zip', 'size': 1, 'source': 1, 'status': 2, 'taskImportPredicateSeconds': 3, 'taskImportRemainSeconds': 0, 'timezone': 32, 'unzipPredicateSeconds': 0, 'updateTime': '2026-03-31 13:41:07', 'userId': '451612596947140608'}, 'message': 'OK', 'result': '0000'}
+2026-03-31 13:41:08 - INFO - fit_zip/451612596947140608/b21fcb8f66b3b60dfe887d6324a24823.zip
+2026-03-31 13:41:08 - INFO - 请求参数: {"source": 1, "timezone": 32, "bucket": "coros-oss", "md5": "b21fcb8f66b3b60dfe887d6324a24823", "size": 74347, "object": "fit_zip/451612596947140608/b21fcb8f66b3b60dfe887d6324a24823.zip", "serviceName": "aliyun", "oriFileName": "22294846969.zip"}
+2026-03-31 13:41:14 - INFO - 响应信息: {'apiCode': '8E16FCC7', 'data': {'createTime': '2026-03-31 13:41:09', 'fileUrl': '451612596947140608/b21fcb8f66b3b60dfe887d6324a24823.zip', 'finishSize': 1, 'id': '476455665458512372', 'idString': '476455665458512372', 'md5': 'b21fcb8f66b3b60dfe887d6324a24823', 'originalFilename': '22294846969.zip', 'size': 1, 'source': 1, 'status': 2, 'taskImportPredicateSeconds': 3, 'taskImportRemainSeconds': 0, 'timezone': 32, 'unzipPredicateSeconds': 0, 'updateTime': '2026-03-31 13:41:14', 'userId': '451612596947140608'}, 'message': 'OK', 'result': '0000'}
+2026-03-31 13:41:14 - INFO - fit_zip/451612596947140608/4702db3b81b7de220aca04e7a678d7df.zip
+2026-03-31 13:41:14 - INFO - 请求参数: {"source": 1, "timezone": 32, "bucket": "coros-oss", "md5": "4702db3b81b7de220aca04e7a678d7df", "size": 71848, "object": "fit_zip/451612596947140608/4702db3b81b7de220aca04e7a678d7df.zip", "serviceName": "aliyun", "oriFileName": "22277650627.zip"}
+2026-03-31 13:41:20 - INFO - 响应信息: {'apiCode': '8E16FCC7', 'data': {'createTime': '2026-03-31 13:41:15', 'fileUrl': '451612596947140608/4702db3b81b7de220aca04e7a678d7df.zip', 'finishSize': 1, 'id': '476455667331268608', 'idString': '476455667331268608', 'md5': '4702db3b81b7de220aca04e7a678d7df', 'originalFilename': '22277650627.zip', 'size': 1, 'source': 1, 'status': 2, 'taskImportPredicateSeconds': 3, 'taskImportRemainSeconds': 0, 'timezone': 32, 'unzipPredicateSeconds': 0, 'updateTime': '2026-03-31 13:41:20', 'userId': '451612596947140608'}, 'message': 'OK', 'result': '0000'}

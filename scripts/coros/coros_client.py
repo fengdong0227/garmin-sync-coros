@@ -5,8 +5,8 @@ import logging
 import certifi
 
 
-from coros.region_config import REGIONCONFIG
-from coros.sts_config import STS_CONFIG
+from scripts.coros.region_config import REGIONCONFIG
+from scripts.coros.sts_config import STS_CONFIG
 
 
 class CorosClient:
