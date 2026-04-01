@@ -54,3 +54,28 @@ coros.coros_client.CorosLoginError: Coros login anomaly, the reason for the anom
 2026-03-31 13:41:14 - INFO - fit_zip/451612596947140608/4702db3b81b7de220aca04e7a678d7df.zip
 2026-03-31 13:41:14 - INFO - 请求参数: {"source": 1, "timezone": 32, "bucket": "coros-oss", "md5": "4702db3b81b7de220aca04e7a678d7df", "size": 71848, "object": "fit_zip/451612596947140608/4702db3b81b7de220aca04e7a678d7df.zip", "serviceName": "aliyun", "oriFileName": "22277650627.zip"}
 2026-03-31 13:41:20 - INFO - 响应信息: {'apiCode': '8E16FCC7', 'data': {'createTime': '2026-03-31 13:41:15', 'fileUrl': '451612596947140608/4702db3b81b7de220aca04e7a678d7df.zip', 'finishSize': 1, 'id': '476455667331268608', 'idString': '476455667331268608', 'md5': '4702db3b81b7de220aca04e7a678d7df', 'originalFilename': '22277650627.zip', 'size': 1, 'source': 1, 'status': 2, 'taskImportPredicateSeconds': 3, 'taskImportRemainSeconds': 0, 'timezone': 32, 'unzipPredicateSeconds': 0, 'updateTime': '2026-03-31 13:41:20', 'userId': '451612596947140608'}, 'message': 'OK', 'result': '0000'}
+2026-04-01 15:41:00 - INFO - 数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/garmin.db
+2026-04-01 15:41:00 - INFO - 数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/coros.db
+2026-04-01 15:41:00 - INFO - Garmin 配置为国际区 (garmin.com)
+2026-04-01 15:41:00 - WARNING - Garmin is not logging in or the token has expired.
+2026-04-01 15:41:00 - INFO - 尝试从 /Users/luohangqi/PycharmProjects/garmin-sync-coros/garth 加载 Token...
+2026-04-01 15:41:00 - INFO - Token 已过期，尝试刷新...
+2026-04-01 15:41:05 - INFO - Token 刷新成功
+2026-04-01 15:41:05 - WARNING - Token 验证失败：
+2026-04-01 15:41:05 - INFO - Token 无效或不存在，使用账号密码登录
+2026-04-01 15:41:05 - INFO - 开始登录 Garmin Connect...
+2026-04-01 15:41:13 - INFO - Token 已保存到：/Users/luohangqi/PycharmProjects/garmin-sync-coros/garth
+2026-04-01 15:41:13 - INFO - 登录成功！用户：fengdong0227@163.com
+2026-04-01 15:41:14 - INFO - fit_zip/451612596947140608/c4c3ffd1ee92d3b9de41683038ab1a3a.zip
+2026-04-01 15:41:15 - INFO - 请求参数: {"source": 1, "timezone": 32, "bucket": "coros-oss", "md5": "c4c3ffd1ee92d3b9de41683038ab1a3a", "size": 93150, "object": "fit_zip/451612596947140608/c4c3ffd1ee92d3b9de41683038ab1a3a.zip", "serviceName": "aliyun", "oriFileName": "22366444053.zip"}
+2026-04-01 15:41:28 - INFO - 响应信息: {'apiCode': '8E16FCC7', 'data': {'createTime': '2026-04-01 15:41:16', 'fileUrl': '451612596947140608/c4c3ffd1ee92d3b9de41683038ab1a3a.zip', 'finishSize': 1, 'id': '476480792896242364', 'idString': '476480792896242364', 'md5': 'c4c3ffd1ee92d3b9de41683038ab1a3a', 'originalFilename': '22366444053.zip', 'size': 1, 'source': 1, 'status': 2, 'taskImportPredicateSeconds': 3, 'taskImportRemainSeconds': 0, 'timezone': 32, 'unzipPredicateSeconds': 0, 'updateTime': '2026-04-01 15:41:29', 'userId': '451612596947140608'}, 'message': 'OK', 'result': '0000'}
+2026-04-01 15:51:12 - INFO - 数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/garmin.db
+2026-04-01 15:51:12 - INFO - 数据库目录为:/Users/luohangqi/PycharmProjects/garmin-sync-coros/db/coros.db
+2026-04-01 15:51:12 - INFO - Garmin 配置为国际区 (garmin.com)
+2026-04-01 15:51:13 - WARNING - Garmin is not logging in or the token has expired.
+2026-04-01 15:51:13 - INFO - 尝试从 /Users/luohangqi/PycharmProjects/garmin-sync-coros/garth 加载 Token...
+2026-04-01 15:51:14 - WARNING - Token 验证失败：
+2026-04-01 15:51:14 - INFO - Token 无效或不存在，使用账号密码登录
+2026-04-01 15:51:14 - INFO - 开始登录 Garmin Connect...
+2026-04-01 15:51:20 - INFO - Token 已保存到：/Users/luohangqi/PycharmProjects/garmin-sync-coros/garth
+2026-04-01 15:51:20 - INFO - 登录成功！用户：fengdong0227@163.com

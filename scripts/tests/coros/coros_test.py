@@ -10,14 +10,13 @@ def test():
     corosClient = CorosClient(COROS_EMAIL, COROS_PASSWORD, 10)
     corosClient.login()
     print(corosClient.userId)
-    corosClient.uploadActivity("fit_zip/58a0fa43058a4aaf84d2564ead944271.fit", calculate_md5_file("garmin-fit/58a0fa43058a4aaf84d2564ead944271.fit"), "58a0fa43058a4aaf84d2564ead944271.fit")
-    client = AliOssClient()
     file_path = '../../../garmin-fit'
     last_file = get_latest_file(file_path)
     print(last_file)
     import os
     size = os.path.getsize(last_file) # 文件路径及文件名
     print(size)
+    client = AliOssClient()
     oss_obj = client.multipart_upload(last_file, f"{corosClient.userId}/{calculate_md5_file(last_file)}.zip")
     upload_result = corosClient.uploadActivity(f"fit_zip/{corosClient.userId}/{calculate_md5_file(last_file)}.zip", calculate_md5_file(last_file), "22354343348.zip", size)
     print(upload_result)

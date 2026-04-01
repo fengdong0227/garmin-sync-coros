@@ -24,13 +24,13 @@ logging.basicConfig(
 )
 
 SYNC_CONFIG = {
-    'GARMIN_AUTH_DOMAIN': '',
-    'GARMIN_EMAIL': '',
-    'GARMIN_PASSWORD': '',
-    'GARMIN_NEWEST_NUM': 0,
-    "COROS_EMAIL": '',
-    "COROS_PASSWORD": '',
-    "COROS_NEWEST_NUM": 0,
+    'GARMIN_AUTH_DOMAIN': 'COM',
+    'GARMIN_EMAIL': 'fengdong0227@163.com',
+    'GARMIN_PASSWORD': 'aDongo94227#',
+    'GARMIN_NEWEST_NUM': 10,
+    "COROS_EMAIL": 'fengdong0227@163.com',
+    "COROS_PASSWORD": 'Fl314O.0',
+    "COROS_NEWEST_NUM": 10,
 }
 
 

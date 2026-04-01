@@ -14,18 +14,18 @@ sys.path.insert(0, parent_dir)
 
 from scripts.garmin.garmin_client import GarminClient
 
+email='fengdong0227@163.com'
+password='Fl314O.0'
+auth_domain = "CN"
 
 def test_login_and_save():
     """测试登录并保存 token"""
     print("\n=== 测试登录并保存 Token ===")
 
-    email = input("请输入测试账号邮箱：")
-    password = input("请输入测试账号密码：")
-
     client = GarminClient(
         email=email,
         password=password,
-        auth_domain="COM",
+        auth_domain=auth_domain,
         newest_num=10,
     )
 
@@ -44,9 +44,9 @@ def test_load_token():
     print("\n=== 测试加载 Token ===")
 
     client = GarminClient(
-        email="test@example.com",
-        password="dummy",
-        auth_domain="COM",
+        email=email,
+        password=password,
+        auth_domain=auth_domain,
         newest_num=10,
     )
 
@@ -64,13 +64,10 @@ def test_authenticate():
     """测试自动认证（优先 token，失败则登录）"""
     print("\n=== 测试自动认证 ===")
 
-    email = input("请输入测试账号邮箱：")
-    password = input("请输入测试账号密码：")
-
     client = GarminClient(
         email=email,
         password=password,
-        auth_domain="COM",
+        auth_domain=auth_domain,
         newest_num=10,
     )
 
@@ -144,5 +141,4 @@ def main():
 
 
 if __name__ == "__main__":
-    # main()
-    test_load_token()
+    main()

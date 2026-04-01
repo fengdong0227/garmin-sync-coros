@@ -70,7 +70,7 @@ class GarminClient:
             garth.resume(token_dir)
 
             # 检查 token 是否过期
-            if garth.client.oauth2_token and garth.client.oauth2_token.expired:
+            if garth.client.oauth2_token.expired:
                 logger.info("Token 已过期，尝试刷新...")
                 try:
                     garth.client.refresh_oauth2()
